@@ -38,7 +38,7 @@ namespace ControVTCard.Web.Controllers
                 }
                 else
                 {
-                    RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Home");
                 }
 
             }

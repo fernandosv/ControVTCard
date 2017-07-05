@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ControVTCard.Web.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
@@ -20,7 +21,7 @@ namespace ControVTCard.Web.Models
                 {
                     comando.Connection = conexao;
                     comando.CommandText = string.Format(
-                        "select count(*)from usuario where login='{0}' and senha='{1}'", login, senha);
+                    "select count(*)from usuario where login='{0}' and senha='{1}'", login, CriptoHelper.HashMD5(senha));
                     ret = ((int)comando.ExecuteScalar() > 0);
                 }
             }
