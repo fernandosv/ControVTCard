@@ -25,19 +25,59 @@
                     <ul class="nav navbar-nav">
                         <li>
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                Cadastro
+                                Cadastros
                                 <span class="caret"></span>
                             </a>
+                            @*NIVEL 1*@
                             <ul class="dropdown-menu">
-                                <li>@Html.ActionLink("Grupos de Produtos", "GrupoProduto", "Cadastro")</li>
+                                <li class="dropdown-submenu">                                    
+                                    <a tabindex="-1" href="#">Empresa</a>
+                                    @*NIVEL 2*@
+                                    <ul class="dropdown-menu">
+                                        @*NIVEL 3*@
+                                        <li class="dropdown-submenu">
+                                            <a href="#">Cadastrar</a>
+                                            <ul class="dropdown-menu">
+                                                <li>@Html.ActionLink("Usuários", "Usuario", "Cadastro")</li>
+                                                <li><a href="#">Empresa</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
                                 <li class="divider"></li>
-                                <li>@Html.ActionLink("Países", "Pais", "Cadastro")</li>
-                                <li>@Html.ActionLink("Estados", "Estado", "Cadastro")</li>
-                                <li>@Html.ActionLink("Cidades", "Cidade", "Cadastro")</li>
-                                <li class="divider"></li>
-                                <li>@Html.ActionLink("Perfis de Usuários", "PerfilUsuario", "Cadastro")</li>
-                                <li>@Html.ActionLink("Usuários", "Usuario", "Cadastro")</li>
-                            </ul>
+                                @*NIVEL 1*@
+                                <li class="dropdown-submenu">
+                                        <a tabindex="-1" href="#">A1</a>
+                                        @*NIVEL 2*@
+                                        <ul class="dropdown-menu">
+                                            @*NIVEL 3*@
+                                            <li class="dropdown-submenu">
+                                                <a href="#">A2</a>
+                                                <ul class="dropdown-menu">
+                                                    <li></li>
+                                                    <li><a href="#">A3</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="divider"></li>
+                                @*NIVEL 1*@
+                                <li class="dropdown-submenu">
+                                    <a tabindex="-1" href="#">B1</a>
+                                    @*NIVEL 2*@
+                                    <ul class="dropdown-menu">
+                                        @*NIVEL 3*@
+                                        <li class="dropdown-submenu">
+                                            <a href="#">B2</a>
+                                            <ul class="dropdown-menu">
+                                                <li></li>
+                                                <li><a href="#">B3</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                </ul>
                         </li>
                         <li>
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -45,10 +85,21 @@
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li>@Html.ActionLink("Entrada de Produtos", "EntradaEstoque", "Operacao")</li>
-                                <li>@Html.ActionLink("Saída de Produtos", "SaidaEstoque", "Operacao")</li>
-                                <li>@Html.ActionLink("Lançamento de Perda de Produtos", "LancPerdaProduto", "Operacao")</li>
-                                <li>@Html.ActionLink("Inventário de Estoque", "Inventario", "Operacao")</li>
+                                @*NIVEL 1*@
+                                <li class="dropdown-submenu">
+                                    <a tabindex="-1" href="#">A1</a>
+                                    @*NIVEL 2*@
+                                    <ul class="dropdown-menu">
+                                        @*NIVEL 3*@
+                                        <li class="dropdown-submenu">
+                                            <a href="#">A2</a>
+                                            <ul class="dropdown-menu">
+                                                <li></li>
+                                                <li><a href="#">A3</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
                             </ul>
                         </li>
                         <li>
@@ -57,8 +108,21 @@
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li>@Html.ActionLink("Posição Estoque", "PosicaoEstoque", "Relatorio")</li>
-                                <li>@Html.ActionLink("Ressuprimento", "Ressuprimento", "Relatorio")</li>
+                                @*NIVEL 1*@
+                                <li class="dropdown-submenu">
+                                    <a tabindex="-1" href="#">A1</a>
+                                    @*NIVEL 2*@
+                                    <ul class="dropdown-menu">
+                                        @*NIVEL 3*@
+                                        <li class="dropdown-submenu">
+                                            <a href="#">A2</a>
+                                            <ul class="dropdown-menu">
+                                                <li></li>
+                                                <li><a href="#">A3</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
                             </ul>
                         </li>
                         <li>
@@ -67,8 +131,21 @@
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li>@Html.ActionLink("Perdas por Mês", "PerdaMes", "Grafico")</li>
-                                <li>@Html.ActionLink("Entras vs Saída por Mês", "EntradaSaidaMesa", "Grafico")</li>
+                                @*NIVEL 1*@
+                                <li class="dropdown-submenu">
+                                    <a tabindex="-1" href="#">A1</a>
+                                    @*NIVEL 2*@
+                                    <ul class="dropdown-menu">
+                                        @*NIVEL 3*@
+                                        <li class="dropdown-submenu">
+                                            <a href="#">A2</a>
+                                            <ul class="dropdown-menu">
+                                                <li></li>
+                                                <li><a href="#">A3</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
                             </ul>
                         </li>
 
@@ -77,7 +154,15 @@
                     {
                         <ul class="nav navbar-nav navbar-right">
                             <li>@Html.ActionLink("Sobre", "Sobre", "Home")</li>
-                            <li><a href="#">Olá @User.Identity.Name</a></li>
+                            <li>
+                                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">@User.Identity.Name<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#"><i class="glyphicon glyphicon-pencil"></i> Editar</a></li>
+                                    <li><a href="#"><i class="glyphicon glyphicon-trash"></i> Apagar</a></li>
+                                    <li><a href="#"><i class="glyphicon glyphicon-ban-circle"></i> Ban</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#"><i class="i"></i> Tornar Administrador</a></li>
+                                </ul>
                             <li><a href="javascript:document.getElementById('logoffForm').submit()">Sair</a></li>
                         </ul>
                     }
@@ -85,7 +170,7 @@
                 else
                 {
                     <ul class="nav navbar-nav navbar-right">
-                        <li>@Html.ActionLink(" Login", "Login", "Conta")</li>                        
+                        <li>@Html.ActionLink(" Login", "Login", "Conta")</li>
                     </ul>
                 }
             </div>
