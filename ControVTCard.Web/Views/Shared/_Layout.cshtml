@@ -25,63 +25,47 @@
                     <ul class="nav navbar-nav">
                         <li>
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                Cadastros
+                                Ferramentas
                                 <span class="caret"></span>
                             </a>
                             @*NIVEL 1*@
                             <ul class="dropdown-menu">
-                                <li class="dropdown-submenu">                                    
-                                    <a tabindex="-1" href="#">Empresa</a>
+                                <li class="dropdown-submenu">
+                                    <a tabindex="-1" href="#">CARTÃO</a>
                                     @*NIVEL 2*@
                                     <ul class="dropdown-menu">
-                                        @*NIVEL 3*@
-                                        <li class="dropdown-submenu">
-                                            <a href="#">Cadastrar</a>
-                                            <ul class="dropdown-menu">
-                                                <li>@Html.ActionLink("Usuários", "Usuario", "Cadastro")</li>
-                                                <li><a href="#">Empresa</a></li>
-                                            </ul>
-                                        </li>
+                                        <li>@Html.ActionLink("BLOQUEIO", "Index", "CadUsuario")</li>
+                                        <li>@Html.ActionLink("SEGUNDA VIA", "Index", "CadUsuario")</li>
+                                        <li class="divider"></li>
+                                        <li>@Html.ActionLink("VERIFICAR SALDO", "Index", "CadUsuario")</li>
                                     </ul>
                                 </li>
                                 <li class="divider"></li>
-                                @*NIVEL 1*@
+                               @*NIVEL 1*@
                                 <li class="dropdown-submenu">
-                                        <a tabindex="-1" href="#">A1</a>
-                                        @*NIVEL 2*@
-                                        <ul class="dropdown-menu">
-                                            @*NIVEL 3*@
-                                            <li class="dropdown-submenu">
-                                                <a href="#">A2</a>
-                                                <ul class="dropdown-menu">
-                                                    <li></li>
-                                                    <li><a href="#">A3</a></li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="divider"></li>
-                                @*NIVEL 1*@
-                                <li class="dropdown-submenu">
-                                    <a tabindex="-1" href="#">B1</a>
+                                    <a tabindex="-1" href="#">PEDIDO</a>
                                     @*NIVEL 2*@
                                     <ul class="dropdown-menu">
                                         @*NIVEL 3*@
+                                        <li>@Html.ActionLink("EDITAR", "Index", "CadUsuario")</li>
+                                        <li class="divider"></li>
                                         <li class="dropdown-submenu">
-                                            <a href="#">B2</a>
+                                            <a href="#">GERAR</a>
                                             <ul class="dropdown-menu">
                                                 <li></li>
-                                                <li><a href="#">B3</a></li>
+                                                <li><a href="#">MANUAL</a></li>
+                                                <li><a href="#">IMPORTAR</a></li>
                                             </ul>
                                         </li>
                                     </ul>
                                 </li>
 
-                                </ul>
+                            </ul>
                         </li>
+
                         <li>
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                Operações
+                                Funcionários
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
@@ -102,29 +86,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li>
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                Relatórios
-                                <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                @*NIVEL 1*@
-                                <li class="dropdown-submenu">
-                                    <a tabindex="-1" href="#">A1</a>
-                                    @*NIVEL 2*@
-                                    <ul class="dropdown-menu">
-                                        @*NIVEL 3*@
-                                        <li class="dropdown-submenu">
-                                            <a href="#">A2</a>
-                                            <ul class="dropdown-menu">
-                                                <li></li>
-                                                <li><a href="#">A3</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
+
                         <li>
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 Gráficos
@@ -149,11 +111,62 @@
                             </ul>
                         </li>
 
+                        <li>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                Relatórios
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                @*NIVEL 1*@
+                                <li class="dropdown-submenu">
+                                    <a tabindex="-1" href="#">A1</a>
+                                    @*NIVEL 2*@
+                                    <ul class="dropdown-menu">
+                                        @*NIVEL 3*@
+                                        <li class="dropdown-submenu">
+                                            <a href="#">A2</a>
+                                            <ul class="dropdown-menu">
+                                                <li></li>
+                                                <li><a href="#">A3</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                Operações
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                @*NIVEL 1*@
+                                <li class="dropdown-submenu">
+                                    <a tabindex="-1" href="#">CADASTRAR</a>
+                                    @*NIVEL 2*@
+                                    <ul class="dropdown-menu">
+                                        @*NIVEL 3*@
+                                        <li class="dropdown-submenu">
+                                            <a href="#">Cadastrar</a>
+                                            <ul class="dropdown-menu">
+                                                <li>@Html.ActionLink("Usuários", "Index", "CadUsuario")</li>
+                                                <li>@Html.ActionLink("Funcionários", "Index", "CadFuncionario")</li>
+                                                <li><a href="#">Empresa</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                       
+                     
+
                     </ul>
                     using (Html.BeginForm("LogOff", "Conta", FormMethod.Post, new { id = "logoffForm" }))
                     {
                         <ul class="nav navbar-nav navbar-right">
-                            <li>@Html.ActionLink("Sobre", "Sobre", "Home")</li>
+                            <li>@Html.ActionLink("Solicitações", "Sobre", "Home")</li>
                             <li>
                                 <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">@User.Identity.Name<span class="caret"></span></a>
                                 <ul class="dropdown-menu">

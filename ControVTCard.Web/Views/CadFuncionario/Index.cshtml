@@ -1,33 +1,7 @@
-﻿@model List<ControVTCard.Web.Models.UsuarioModel>
+﻿
 @{
-    ViewBag.Title = "Cadastro de Usuários";
+    ViewBag.Title = "Cadastro de Funcionário";
 }
-<style>
-    #grid_cadastro > thead > tr th:nth-child(2) {
-        width: 110px;
-    }
-
-    #grid_cadastro > thead > tr th:nth-child(3) {
-        width: 200px;
-    }
-
-    #cadastro {
-        width: 70%;
-        margin: 0 auto;
-    }
-
-    #cadastro_cabecalho {
-        border-bottom: 1px #dddddd solid;
-    }
-
-    #cadastro_conteudo {
-        margin-top: 20px;
-    }
-
-    #cabecalho_grid {
-        margin-bottom: 20px;
-    }
-</style>
 <div id="cadastro">
     <section id="cadastro_cabecalho">
         <h1>@ViewBag.Title</h1>
@@ -44,16 +18,18 @@
                     <thead>
                         <tr>
                             <th>Nome</th>
-                            <th>Login</th>
+                            <th>Matrícula</th>
+                            <th>Utilização Diária</th>
                             <th>Ação</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var item in Model)
                         {
-                            <tr data-id="@item.Id">
+                            <tr @*data-cnpj="@item.cnpj"*@ data-id="@item.Id">
                                 <td>@item.Nome</td>
-                                <td>@item.Login</td>
+                                <td>@item.Matricula</td>
+                                <td>@item.Utl_Diaria</td>
                                 <td>
                                     <a class="btn btn-primary btn-alterar" role="button"><i class="glyphicon glyphicon-pencil"></i> Alterar</a>
                                     <a class="btn btn-danger btn-excluir" role="button"><i class="glyphicon glyphicon-trash"></i> Excluir</a>
@@ -68,7 +44,7 @@
 </div>
 @Html.Hidden("id_cadastro")
 <div id="modal_cadastro" class="form-horizontal invisivel" role="dialog">
-    
+
     <fieldset>
         <div id="msg_mensagem_aviso" class="alert alert-danger invisivel"></div>
         <div id="msg_erro" class="alert alert-danger invisible">Ops! Deus ruim!</div>
@@ -76,19 +52,19 @@
         <div class="row">
             <div class="form-group">
                 @Html.Label("txt_nome", "Nome", new { @class = "col-md-3 control-label" })
-                <div class="col-md-12">
+                <div>
                     @Html.TextBox("txt_nome", null, new { @class = "form-control" })
                 </div>
             </div>
             <div class="form-group">
                 @Html.Label("txt_login", "Login", new { @class = "col-md-3 control-label" })
-                <div class="col-md-12">
+                <div>
                     @Html.TextBox("txt_login", null, new { @class = "form-control" })
                 </div>
             </div>
             <div class="form-group">
                 @Html.Label("txt_senha", "Senha", new { @class = "col-md-3 control-label" })
-                <div class="col-md-12">
+                <div>
                     @Html.TextBox("txt_senha", null, new { @class = "form-control", type = "password" })
                 </div>
             </div>
@@ -100,7 +76,7 @@
                         <a id="btn_sair" class="btn btn-default" role="button" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> Sair</a>
                         <a id="btn_confirmar" class="btn btn-primary" role="button"><i class="glyphicon glyphicon-ok"></i> Salvar</a>
                     </div>
-                                        
+
                 </div>
             </div>
         </div>
@@ -155,12 +131,13 @@
         }
 
         $(document).on('click', '#btn_incluir', function () {
+
             abrir_form({ Id: 0, Nome: '', Login: '', Senha: '' });
         })
         .on('click', '.btn-alterar', function () {
             var btn = $(this),
                 id = btn.closest('tr').attr('data-id'),
-                url = '@Url.Action("RecuperarUsuario", "Cadastro")',
+                url = '@Url.Action("RecuperarUsuario", "CadUsuario")',
                 param = { 'id': id };
 
             $.post(url, add_anti_forgery_token(param), function (response) {
@@ -174,7 +151,7 @@
             var btn = $(this),
                 tr = btn.closest('tr'),
                 id = tr.attr('data-id'),
-                url = '@Url.Action("ExcluirUsuario", "Cadastro")',
+                url = '@Url.Action("ExcluirUsuario", "CadUsuario")',
                 param = { 'id': id };
 
             bootbox.confirm({
@@ -202,7 +179,7 @@
         })
         .on('click', '#btn_confirmar', function () {
             var btn = $(this),
-                url = '@Url.Action("SalvarUsuario", "Cadastro")',
+                url = '@Url.Action("SalvarUsuario", "CadUsuario")',
                 param = {
                     Id: $('#id_cadastro').val(),
                     Nome: $('#txt_nome').val(),
