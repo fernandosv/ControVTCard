@@ -15,12 +15,12 @@ namespace ControVTCard.Web.Controllers
  
          private const string _senhaPadrao = "{$127;$188}";
  
-         [Authorize]
-         public ActionResult Usuario()
-         {
-             ViewBag.SenhaPadrao = _senhaPadrao;
-             return View(UsuarioModel.RecuperarLista());
-         }
+         //[Authorize]
+         //public ActionResult Usuario()
+         //{
+         //    //ViewBag.SenhaPadrao = _senhaPadrao;
+         //    //return View(UsuarioModel.RecuperarLista());
+         //}
  
          [HttpPost]
          [Authorize]

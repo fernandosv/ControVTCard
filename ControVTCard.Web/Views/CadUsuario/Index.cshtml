@@ -268,7 +268,27 @@
                     $('#msg_erro').hide();
                 }
             });
-        });
+            })
+            .on('click', '.page-item', function () {
+                var btn = $(this),
+                    pagina = btn.text(),
+                    url = '@Url.Action("UsuarioPagina", "CadUsuario")';
+
+                $.post(url, add_anti_forgery_token({ pagina }), function (response) {
+                    if (response) {
+                        var table = $('#grid_cadastro').find('tbody');
+
+                        table.empty();
+                        for (var i = 0; i < response.length; i++) {
+                            table.append(criar_linha_grid(response[i]));
+                        }
+
+                        btn.siblings().removeClass('active');
+                        btn.addClass('active');
+                    }
+                });
+             });
+
 
         function formatar_mensagem_aviso(mensagens) {
             var ret = '';

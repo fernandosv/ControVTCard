@@ -10,19 +10,22 @@ namespace ControVTCard.Web.Controllers
     public class CadUsuarioController : Controller
     {
         private const string _senhaPadrao = "{$127;$188}";
+        private const int _quantMaxLinhasPorPagina = 5;
 
         [Authorize]
         public ActionResult Index()
         {
             ViewBag.SenhaPadrao = _senhaPadrao;
 
-            var lista = UsuarioModel.RecuperarLista();
-
-            ViewBag.QuantMaxLinhasPorPagina = 5;
+            ViewBag.QuantMaxLinhasPorPagina = _quantMaxLinhasPorPagina;
             ViewBag.PaginaAtual = 1;
-            
-            var difQuantPaginas = (lista.Count % ViewBag.QuantMaxLinhasPorPagina) > 0 ? 1 : 0;
-            ViewBag.QuantPaginas = (lista.Count / ViewBag.QuantMaxLinhasPorPagina) + difQuantPaginas;
+
+            var lista = UsuarioModel.RecuperarLista(ViewBag.PaginaAtual, _quantMaxLinhasPorPagina);
+            var quant = UsuarioModel.RecuperarQuantidade();
+
+            var difQuantPaginas = (quant % ViewBag.QuantMaxLinhasPorPagina) > 0 ? 1 : 0;
+            ViewBag.QuantPaginas = (quant / ViewBag.QuantMaxLinhasPorPagina) + difQuantPaginas;
+
 
             return View(lista);
         }
@@ -30,7 +33,17 @@ namespace ControVTCard.Web.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult RecuperarUsuario(int id)
+        public JsonResult UsuarioPagina(int pagina)
+        {
+            var lista = UsuarioModel.RecuperarLista(pagina, _quantMaxLinhasPorPagina);
+
+            return Json(lista);
+        }
+
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public JsonResult RecuperarUsuario(int id)
         {
             return Json(UsuarioModel.RecuperarPeloId(id));
         }
@@ -38,7 +51,7 @@ namespace ControVTCard.Web.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult ExcluirUsuario(int id)
+        public JsonResult ExcluirUsuario(int id)
         {
             return Json(UsuarioModel.ExcluirPeloId(id));
         }
@@ -46,7 +59,7 @@ namespace ControVTCard.Web.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult SalvarUsuario(UsuarioModel model)
+        public JsonResult SalvarUsuario(UsuarioModel model)
         {
             var resultado = "OK";
             var mensagens = new List<string>();
