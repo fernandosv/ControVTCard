@@ -17,6 +17,7 @@ namespace ControVTCard.Web.Controllers
         {
             ViewBag.SenhaPadrao = _senhaPadrao;
 
+            ViewBag.ListaTamPag = new SelectList(new int[] { _quantMaxLinhasPorPagina, 10, 15, 20 }, _quantMaxLinhasPorPagina);
             ViewBag.QuantMaxLinhasPorPagina = _quantMaxLinhasPorPagina;
             ViewBag.PaginaAtual = 1;
 
@@ -33,9 +34,9 @@ namespace ControVTCard.Web.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public JsonResult UsuarioPagina(int pagina)
+        public JsonResult UsuarioPagina(int pagina, int tamPag)
         {
-            var lista = UsuarioModel.RecuperarLista(pagina, _quantMaxLinhasPorPagina);
+            var lista = UsuarioModel.RecuperarLista(pagina, tamPag);
 
             return Json(lista);
         }
