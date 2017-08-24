@@ -15,7 +15,16 @@ namespace ControVTCard.Web.Controllers
         public ActionResult Index()
         {
             ViewBag.SenhaPadrao = _senhaPadrao;
-            return View(UsuarioModel.RecuperarLista());
+
+            var lista = UsuarioModel.RecuperarLista();
+
+            ViewBag.QuantMaxLinhasPorPagina = 5;
+            ViewBag.PaginaAtual = 1;
+            
+            var difQuantPaginas = (lista.Count % ViewBag.QuantMaxLinhasPorPagina) > 0 ? 1 : 0;
+            ViewBag.QuantPaginas = (lista.Count / ViewBag.QuantMaxLinhasPorPagina) + difQuantPaginas;
+
+            return View(lista);
         }
 
         [HttpPost]
