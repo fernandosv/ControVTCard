@@ -14,6 +14,7 @@ namespace ControVTCard.Web.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Por favor informe o login")]
+        [StringLength(50, MinimumLength = 5)]
         public string Login { get; set; }
         [Required(ErrorMessage = "Por favor informe o senha")]
         public string Senha { get; set; }

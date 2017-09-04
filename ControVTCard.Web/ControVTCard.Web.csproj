@@ -144,6 +144,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CadastroController.cs" />
+    <Compile Include="Controllers\Cadastro\CadCardRequestController.cs" />
     <Compile Include="Controllers\Cadastro\CadFuncionarioController.cs" />
     <Compile Include="Controllers\Cadastro\CadUsuarioController.cs" />
     <Compile Include="Controllers\ContaController.cs" />
@@ -291,6 +292,9 @@
     <Content Include="Views\Conta\Login.cshtml" />
     <Content Include="Views\CadUsuario\Index.cshtml" />
     <Content Include="Views\CadFuncionario\Index.cshtml" />
+    <Content Include="Views\CadFuncionario\Cad.cshtml" />
+    <Content Include="Views\CadCardRequest\Index.cshtml" />
+    <Content Include="Views\CadCardRequest\SegVia.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

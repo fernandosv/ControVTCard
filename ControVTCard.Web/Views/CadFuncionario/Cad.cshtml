@@ -1,0 +1,354 @@
+﻿
+@{
+    ViewBag.Title = "CADASTRO DE FUNCIONÁRIO";
+}
+<link href="~/Content/bootstrap-select.css" rel="stylesheet" />
+<style>
+    #grid_cadastro > thead > tr th:nth-child(2) {
+        width: 110px;
+    }
+
+    #grid_cadastro > thead > tr th:nth-child(3) {
+        width: 200px;
+    }
+
+    #cadastro {
+        width: 70%;
+        margin: 0 auto;
+    }
+
+    #cadastro_cabecalho {
+        border-bottom: 1px #dddddd solid;
+    }
+
+    #cadastro_conteudo {
+        margin-top: 20px;
+    }
+
+    #cabecalho_grid {
+        margin-bottom: 20px;
+    }
+</style>
+<div id="cadastro">
+    @Html.AntiForgeryToken()
+    <section id="cadastro_conteudo" class="well well-sm">
+        <div class="row">
+            <div><a class="btn btn-success form-control" role="button">@ViewBag.Title</a></div>
+            <div><p></p></div>
+            <div id="msg_mensagem_aviso_" class="alert alert-danger invisivel"></div>
+            <div><a class="btn btn-success" role="button">Dados do Funcionário</a></div>
+            <div><p></p></div>
+            <div class="form-group col-md-4">
+                @Html.Label("txt_mat_func", "Matrícula", new { @class = "control-label" })
+                @Html.TextBox("txt_mat_func", null, new { @class = "form-control", @placeholder = "Digite a matrícula" })
+            </div>
+            <div class="form-group col-md-4">
+                @Html.Label("txt_nome_func", "Nome", new { @class = "control-label" })
+                <div>
+                    @Html.TextBox("txt_nome_func", null, new { @class = "form-control", @placeholder = "Digite o nome" })
+                </div>
+            </div>
+            <div class="form-group col-md-4">
+                @Html.Label("txt_cpf_func", "CPF", new { @class = "control-label" })
+                <div>
+                    @Html.TextBox("txt_cpf_func", null, new { @class = "form-control", @placeholder = "Digite o CPF" })
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="cadastro_conteudo" class="well well-sm">
+        <div class="row">
+            <div><a class="btn btn-success" role="button">Dados para solicitação de Cartão para Funcionário</a></div>
+            <div><p></p></div>
+            <div class="col-md-12">
+                @Html.Label("txt_quant_card", "Quantidade de Cartões :", new { @class = "control-label" })
+                <select class="selectpicker show-tick" id="txt_quant_card" name="txt_quant_card" onChange="showDiv(this.value);">
+                    <option value="1Cartao">1 Cartão</option>
+                    <option value="2cartao">2 Cartões</option>
+                </select>
+            </div>
+            <div class="col-md-12">
+                <div><p></p></div>
+                <div><a class="btn btn-success" role="button">Dados do Cartão</a></div>
+                <div><p></p></div>
+                <div id="msg_mensagem_aviso_" class="alert alert-danger invisivel"></div>
+            </div>
+            @* PRIMEIRO CARTAO *@
+            <div id ="1cartao"class="visivel">
+                <div class="form-group col-md-4">
+                    @Html.Label("txt_operadora_card1", "Operadora", new { @class = "control-label" })
+                    <select id="txt_operadora_card1" class="selectpicker show-tick">
+                        <option value="" selected="" disabled="">Selecionar</option>
+                        <option>BETIM CARD</option>
+                        <option>BHBUS</option>
+                        <option>ÓTIMO</option>
+                        <option>SETE ALAGOANO</option>
+                    </select>
+
+                    @*@Html.TextBox("txt_operadora_card1", null, new { @class = "form-control", @placeholder = "Digite a matrícula" })*@
+                </div>
+                <div class="form-group col-md-4">
+                    @Html.Label("txt_tarifa_card1", "Tarifa", new { @class = "control-label" })
+                    <div>
+                        @Html.TextBox("txt_tarifa_card1", null, new { @class = "form-control", @placeholder = "Digite o nome" })
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    @Html.Label("txt_utl_diaria_card1", "Utilização Diária", new { @class = "control-label" })
+                    <div>
+                        <select id="txt_utl_diaria_card1" class="selectpicker show-tick">
+                            <option value="" selected="" disabled="">Selecionar</option>
+                            <option>1 Passagem por dia</option>
+                            <option>2 Passagens por dia</option>
+                            <option>3 Passagens por dia</option>
+                            <option>4 Passagens por dia</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            @* SEGUNDO CARTAO *@
+            <div id="2cartao" class="invisivel">
+                <div class="col-md-12">
+                    <div><a class="btn btn-success" role="button">Dados do Segundo Cartão</a></div>
+                    <div><p></p></div>
+                </div>
+                <div class="form-group col-md-4">
+                    @Html.Label("txt_operadora_card2", "Operadora", new { @class = "control-label" })
+                    <select id="txt_operadora_card2" class="selectpicker show-tick">
+                        <option value="" selected="" disabled="">Selecionar</option>
+                        <option>BETIM CARD</option>
+                        <option>BHBUS</option>
+                        <option>ÓTIMO</option>
+                        <option>SETE ALAGOANO</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    @Html.Label("txt_tarifa_card2", "Tarifa", new { @class = "control-label" })
+                    <div>
+                        @Html.TextBox("txt_tarifa_card2", null, new { @class = "form-control", @placeholder = "Digite o nome" })
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    @Html.Label("txt_utl_diaria_card2", "Utilização Diária", new { @class = "control-label" })
+                    <div>
+                        <select id="txt_utl_diaria_card2" class="selectpicker show-tick">
+                            <option value="" selected="" disabled="">Selecionar</option>
+                            <option>1 Passagem por dia</option>
+                            <option>2 Passagens por dia</option>
+                            <option>3 Passagens por dia</option>
+                            <option>4 Passagens por dia</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="row">        
+        <div class="modal-footer">
+            <div >
+                <a id="btn_sair" class="btn btn-danger" role="button" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> Sair</a>
+                <a id="btn_confirmar" class="btn btn-primary" role="button"><i class="glyphicon glyphicon-floppy-disk"></i> Salvar</a>
+            </div>
+        </div>        
+    </div>
+</div>
+@Html.Hidden("id_cadastro")
+<div id="modal_cadastro" class="form-horizontal invisivel" role="dialog">
+    <fieldset>
+        <div id="msg_mensagem_aviso_" class="alert alert-danger invisivel"></div>
+        <div id="msg_erro" class="alert alert-danger invisible">Ops! Deus ruim!</div>
+        @*@Html.AntiForgeryToken()
+        <div class="row">
+            <div class="form-group">
+                @Html.Label("txt_mat_func_modal", "Matrícula", new { @class = "col-md-3 control-label" })
+                <div>
+                    @Html.TextBox("txt_mat_func_modal", null, new { @class = "form-control", @placeholder = "Digite a matrícula do Funcionário" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("txt_nome_func", "Nome", new { @class = "col-md-3 control-label" })
+                <div>
+                    @Html.TextBox("txt_nome_func", null, new { @class = "form-control", @placeholder = "Digite Nome do Funcionário" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("txt_cpf_func", "CPF", new { @class = "col-md-3 control-label" })
+                <div>
+                    @Html.TextBox("txt_cpf_func", null, new { @class = "form-control", @placeholder = "Digite o CPF do Funcionário" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="modal-footer">
+                        <a id="btn_sair" class="btn btn-default" role="button" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> Sair</a>
+                        <a id="btn_confirmar" class="btn btn-primary" role="button"><i class="glyphicon glyphicon-ok"></i> Salvar</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>*@
+    </fieldset>
+</div>
+
+@section Scripts{
+    <script src="~/Scripts/bootstrap-select.js"></script>
+    <script>
+        function add_anti_forgery_token(data) {
+            data.__RequestVerificationToken = $('[name=__RequestVerificationToken]').val();
+            return data;
+        }
+
+        function showDiv(div) {
+            document.getElementById("2cartao").className = "invisivel";
+            document.getElementById(div).className = "visivel";
+            
+        }
+
+        function abrir_form(dados) {
+            $('#id_cadastro').val(dados.Id);
+            $('#txt_mat_func_modal').val(dados.Mat);
+            $('#txt_nome_func_modal').val(dados.Nome);
+            $('#txt_cpf_func_modal').val(dados.CPF);
+
+            var modal_cadastro = $('#modal_cadastro');
+
+            $('#msg_mensagem_aviso').empty();
+            $('#msg_aviso').hide();
+            $('#msg_mensagem_aviso').hide();
+            $('#msg_erro').hide();
+
+            @*bootbox.dialog({
+                title: '@ViewBag.Title',
+                message: modal_cadastro
+            })
+            .on('shown.bs.modal', function () {
+                modal_cadastro.show(0, function () {
+                    $('#txt_mat_func').focus();
+                });
+            })
+            .on('hidden.bs.modal', function () {
+                modal_cadastro.hide().appendTo('body');
+            });*@
+        }
+
+        //function criar_linha_grid(dados) {
+        //    var ret =
+        //        '<tr data-id=' + dados.Id + '>' +
+        //        '<td>' + dados.Nome + '</td>' +
+        //        '<td>' + dados.Login + '</td>' +
+        //        '<td>' +
+        //        '<a class="btn btn-primary btn-alterar" role="button" style="margin-right: 3px"><i class="glyphicon glyphicon-pencil"></i> Alterar</a>' +
+        //        '<a class="btn btn-danger btn-excluir" role="button"><i class="glyphicon glyphicon-trash"></i> Excluir</a>' +
+        //        '</td>' +
+        //        '</tr>';
+
+        //    return ret;
+        //}
+
+        $(document).on('click', '#_btn_confirmar', function () {
+            abrir_form({ Id: 0, Mat: $('#txt_mat_func').val(), Nome: 'Fernando', CPF: '26' });
+
+        })
+            .on('click', '.btn-alterar', function () {
+                var btn = $(this),
+                    id = btn.closest('tr').attr('data-id'),
+                    url = '@Url.Action("RecuperarUsuario", "CadUsuario")',
+                    param = { 'id': id };
+
+                $.post(url, add_anti_forgery_token(param), function (response) {
+                    if (response) {
+                        response.Senha = '@ViewBag.SenhaPadrao';
+                        abrir_form(response);
+                    }
+                });
+            })
+            .on('click', '.btn-excluir', function () {
+                var btn = $(this),
+                    tr = btn.closest('tr'),
+                    id = tr.attr('data-id'),
+                    url = '@Url.Action("ExcluirUsuario", "CadUsuario")',
+                    param = { 'id': id };
+
+                bootbox.confirm({
+                    message: "Realmente deseja excluir o usuário?",
+                    buttons: {
+                        confirm: {
+                            label: 'Sim',
+                            className: 'btn-danger'
+                        },
+                        cancel: {
+                            label: 'Não',
+                            className: 'btn-success'
+                        }
+                    },
+                    callback: function (result) {
+                        if (result) {
+                            $.post(url, add_anti_forgery_token(param), function (response) {
+                                if (response) {
+                                    tr.remove();
+                                }
+                            });
+                        }
+                    }
+                });
+            })
+            .on('click', '#btn_confirmar', function () {
+                var btn = $(this),
+                url = '@Url.Action("SalvarUsuario", "CadUsuario")',
+                param = {
+                    Id: $('#id_cadastro').val(),
+                    Nome: $('#txt_nome').val(),
+                    Login: $('#txt_login').val(),
+                    Senha: $('#txt_senha').val()
+                };
+
+            $.post(url, add_anti_forgery_token(param), function (response) {
+                if (response.Resultado == "OK") {
+                    if (param.Id == 0) {
+                        param.Id = response.IdSalvo;
+                        var table = $('#grid_cadastro').find('tbody'),
+                            linha = criar_linha_grid(param);
+
+                        table.append(linha);
+                    }
+                    else {
+                        var linha = $('#grid_cadastro').find('tr[data-id=' + param.Id + ']').find('td');
+                        linha
+                            .eq(0).html(param.Nome).end()
+                            .eq(1).html(param.Login);
+                    }
+
+                    $('#modal_cadastro').parents('.bootbox').modal('hide');
+                }
+                else if (response.Resultado == "ERRO") {
+                    $('#msg_aviso').hide();
+                    $('#msg_mensagem_aviso').hide();
+                    $('#msg_erro').show();
+                }
+                else if (response.Resultado == "AVISO") {
+                    $('#msg_mensagem_aviso_').html(formatar_mensagem_aviso(response.Mensagens));
+                    $('#msg_aviso').show();
+                    $('#msg_aviso').delay(4000).fadeOut("slow");
+                    $('#msg_mensagem_aviso_').show();
+                    $('#msg_mensagem_aviso_').delay(2000).fadeOut("slow");
+                    $('#msg_erro').hide();
+                }
+            });
+        });
+
+        function formatar_mensagem_aviso(mensagens) {
+            var ret = '';
+
+            for (var i = 0; i < mensagens.length; i++) {
+                ret += '<li>' + mensagens[i] + '</li>';
+            }
+
+            return '<ul>' + ret + '</ul>';
+        }
+    </script>
+}

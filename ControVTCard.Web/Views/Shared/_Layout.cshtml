@@ -25,17 +25,17 @@
                     <ul class="nav navbar-nav">
                         <li>
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                Ferramentas
+                                Cartões
                                 <span class="caret"></span>
                             </a>
                             @*NIVEL 1*@
                             <ul class="dropdown-menu">
                                 <li class="dropdown-submenu">
-                                    <a tabindex="-1" href="#">CARTÃO</a>
+                                    <a tabindex="-1" href="#">SOLICITAR</a>
                                     @*NIVEL 2*@
                                     <ul class="dropdown-menu">
-                                        <li>@Html.ActionLink("BLOQUEIO", "Index", "CadUsuario")</li>
-                                        <li>@Html.ActionLink("SEGUNDA VIA", "Index", "CadUsuario")</li>
+                                        <li>@Html.ActionLink("BLOQUEIO", "Index", "CadCardRequest")</li>
+                                        <li>@Html.ActionLink("SEGUNDA VIA", "SegVia", "CadCardRequest")</li>
                                         <li class="divider"></li>
                                         <li>@Html.ActionLink("VERIFICAR SALDO", "Index", "CadUsuario")</li>
                                     </ul>

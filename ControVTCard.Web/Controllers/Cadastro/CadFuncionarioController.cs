@@ -10,9 +10,17 @@ namespace ControVTCard.Web.Controllers.Cadastro
     public class CadFuncionarioController : Controller
     {
         // GET: CadFuncionario
+        private const int _quantMaxLinhasPorPagina = 1;
+
         public ActionResult Index()
         {
             return View(FuncionarioModel.RecuperarLista());
         }
+        public ActionResult Cad()
+        {
+            ViewBag.ListaTamPag = new SelectList(new int[] { _quantMaxLinhasPorPagina, 2 }, _quantMaxLinhasPorPagina);
+            return View();
+        }
+
     }
 }

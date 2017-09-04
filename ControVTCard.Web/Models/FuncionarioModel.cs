@@ -14,6 +14,17 @@ namespace ControVTCard.Web.Models
     {
         public int Id { get; set; }
 
+        //[Required(ErrorMessage = "Está faltando preencher o campo Matrícula")]
+        //[StringLength(50, MinimumLength = 5)]
+        //public int Mat { get; set; }
+
+        //[Required(ErrorMessage = "Está faltando preencher o campo Nome do Funcionário")]
+        //[StringLength(50, MinimumLength = 5)]
+        //public string Nome { get; set; }
+
+        ////[Required(ErrorMessage = "Por favor informe o nome")]
+        //public string CPF { get; set; }
+
         [Required(ErrorMessage = "Por favor informe o nome.")]
         public string Nome { get; set; }
         [Required(ErrorMessage = "Por favor informe o Matrícula.")]
@@ -41,8 +52,7 @@ namespace ControVTCard.Web.Models
                         {
                             Id = (int)reader["id"],
                             Nome = (string)reader["nome"],
-                            Matricula = (int)reader["matricula"],
-                            Utl_Diaria = (int)reader["utl_diaria"]
+                            Matricula = (int)reader["matricula"]                            
                         });
                     }
                 }

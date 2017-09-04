@@ -2,6 +2,32 @@
 @{
     ViewBag.Title = "Cadastro de Funcionário";
 }
+<style>
+    #grid_cadastro > thead > tr th:nth-child(2) {
+        width: 110px;
+    }
+
+    #grid_cadastro > thead > tr th:nth-child(3) {
+        width: 200px;
+    }
+
+    #cadastro {
+        width: 70%;
+        margin: 0 auto;
+    }
+
+    #cadastro_cabecalho {
+        border-bottom: 1px #dddddd solid;
+    }
+
+    #cadastro_conteudo {
+        margin-top: 20px;
+    }
+
+    #cabecalho_grid {
+        margin-bottom: 20px;
+    }
+</style>
 <div id="cadastro">
     <section id="cadastro_cabecalho">
         <h1>@ViewBag.Title</h1>
@@ -9,7 +35,7 @@
     <section id="cadastro_conteudo">
         <div id="cabecalho_grid" class="row">
             <div class="col-md-12">
-                <a id="btn_incluir" class="btn btn-success" role="button"><i class="glyphicon glyphicon-plus"></i> Incluir</a>
+                <a href="@Url.Action("Cad","CadFuncionario")" class="btn btn-success" role="button"><i class="glyphicon glyphicon-plus"></i> Incluir</a>
             </div>
         </div>
         <div class="row">
@@ -19,7 +45,6 @@
                         <tr>
                             <th>Nome</th>
                             <th>Matrícula</th>
-                            <th>Utilização Diária</th>
                             <th>Ação</th>
                         </tr>
                     </thead>
@@ -29,7 +54,6 @@
                             <tr @*data-cnpj="@item.cnpj"*@ data-id="@item.Id">
                                 <td>@item.Nome</td>
                                 <td>@item.Matricula</td>
-                                <td>@item.Utl_Diaria</td>
                                 <td>
                                     <a class="btn btn-primary btn-alterar" role="button"><i class="glyphicon glyphicon-pencil"></i> Alterar</a>
                                     <a class="btn btn-danger btn-excluir" role="button"><i class="glyphicon glyphicon-trash"></i> Excluir</a>
@@ -44,44 +68,45 @@
 </div>
 @Html.Hidden("id_cadastro")
 <div id="modal_cadastro" class="form-horizontal invisivel" role="dialog">
-
     <fieldset>
-        <div id="msg_mensagem_aviso" class="alert alert-danger invisivel"></div>
-        <div id="msg_erro" class="alert alert-danger invisible">Ops! Deus ruim!</div>
-        @Html.AntiForgeryToken()
-        <div class="row">
-            <div class="form-group">
-                @Html.Label("txt_nome", "Nome", new { @class = "col-md-3 control-label" })
-                <div>
-                    @Html.TextBox("txt_nome", null, new { @class = "form-control" })
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.Label("txt_login", "Login", new { @class = "col-md-3 control-label" })
-                <div>
-                    @Html.TextBox("txt_login", null, new { @class = "form-control" })
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.Label("txt_senha", "Senha", new { @class = "col-md-3 control-label" })
-                <div>
-                    @Html.TextBox("txt_senha", null, new { @class = "form-control", type = "password" })
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
+            <div id="msg_mensagem_aviso" class="alert alert-danger invisivel"></div>
+            <div id="msg_erro" class="alert alert-danger invisible">Ops! Deus ruim!</div>
+            @Html.AntiForgeryToken()
+            <div class="row">
                 <div class="form-group">
-                    <div class="modal-footer">
-                        <a id="btn_sair" class="btn btn-default" role="button" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> Sair</a>
-                        <a id="btn_confirmar" class="btn btn-primary" role="button"><i class="glyphicon glyphicon-ok"></i> Salvar</a>
+                    @Html.Label("txt_mat_func", "Matrícula", new { @class = "col-md-3 control-label" })
+                    <div>
+                        @Html.TextBox("txt_mat_func", null, new { @class = "form-control", @placeholder = "Digite a matrícula do Funcionário" })
                     </div>
-
+                </div>
+                <div class="form-group">
+                    @Html.Label("txt_nome_func", "Nome", new { @class = "col-md-3 control-label" })
+                    <div>
+                        @Html.TextBox("txt_nome_func", null, new { @class = "form-control", @placeholder = "Digite Nome do Funcionário" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("txt_cpf_func", "CPF", new { @class = "col-md-3 control-label" })
+                    <div>
+                        @Html.TextBox("txt_cpf_func", null, new { @class = "form-control", @placeholder = "Digite o CPF do Funcionário" })
+                    </div>
                 </div>
             </div>
-        </div>
-    </fieldset>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="modal-footer">
+                            <a id="btn_sair" class="btn btn-default" role="button" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> Sair</a>
+                            <a id="btn_confirmar" class="btn btn-primary" role="button"><i class="glyphicon glyphicon-ok"></i> Salvar</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </fieldset>
 </div>
+
 @section Scripts{
     <script>
         function add_anti_forgery_token(data) {
@@ -91,9 +116,9 @@
 
         function abrir_form(dados) {
             $('#id_cadastro').val(dados.Id);
-            $('#txt_nome').val(dados.Nome);
-            $('#txt_login').val(dados.Login);
-            $('#txt_senha').val(dados.Senha);
+            $('#txt_mat_func').val(dados.Mat);
+            $('#txt_nome_func').val(dados.Nome);
+            $('#txt_cpf_func').val(dados.CPF);
 
             var modal_cadastro = $('#modal_cadastro');
 
@@ -108,7 +133,7 @@
             })
             .on('shown.bs.modal', function () {
                 modal_cadastro.show(0, function () {
-                    $('#txt_nome').focus();
+                    $('#txt_mat_func').focus();
                 });
             })
             .on('hidden.bs.modal', function () {
@@ -131,54 +156,53 @@
         }
 
         $(document).on('click', '#btn_incluir', function () {
-
-            abrir_form({ Id: 0, Nome: '', Login: '', Senha: '' });
+            abrir_form({ Id: 0, Mat: '87', Nome: 'Fernando', CPF: '26' });
         })
-        .on('click', '.btn-alterar', function () {
-            var btn = $(this),
-                id = btn.closest('tr').attr('data-id'),
-                url = '@Url.Action("RecuperarUsuario", "CadUsuario")',
-                param = { 'id': id };
+            .on('click', '.btn-alterar', function () {
+                var btn = $(this),
+                    id = btn.closest('tr').attr('data-id'),
+                    url = '@Url.Action("RecuperarUsuario", "CadUsuario")',
+                    param = { 'id': id };
 
-            $.post(url, add_anti_forgery_token(param), function (response) {
-                if (response) {
-                    response.Senha = '@ViewBag.SenhaPadrao';
-                    abrir_form(response);
-                }
-            });
-        })
-        .on('click', '.btn-excluir', function () {
-            var btn = $(this),
-                tr = btn.closest('tr'),
-                id = tr.attr('data-id'),
-                url = '@Url.Action("ExcluirUsuario", "CadUsuario")',
-                param = { 'id': id };
+                $.post(url, add_anti_forgery_token(param), function (response) {
+                    if (response) {
+                        response.Senha = '@ViewBag.SenhaPadrao';
+                        abrir_form(response);
+                    }
+                });
+            })
+            .on('click', '.btn-excluir', function () {
+                var btn = $(this),
+                    tr = btn.closest('tr'),
+                    id = tr.attr('data-id'),
+                    url = '@Url.Action("ExcluirUsuario", "CadUsuario")',
+                    param = { 'id': id };
 
-            bootbox.confirm({
-                message: "Realmente deseja excluir o usuário?",
-                buttons: {
-                    confirm: {
-                        label: 'Sim',
-                        className: 'btn-danger'
+                bootbox.confirm({
+                    message: "Realmente deseja excluir o usuário?",
+                    buttons: {
+                        confirm: {
+                            label: 'Sim',
+                            className: 'btn-danger'
+                        },
+                        cancel: {
+                            label: 'Não',
+                            className: 'btn-success'
+                        }
                     },
-                    cancel: {
-                        label: 'Não',
-                        className: 'btn-success'
+                    callback: function (result) {
+                        if (result) {
+                            $.post(url, add_anti_forgery_token(param), function (response) {
+                                if (response) {
+                                    tr.remove();
+                                }
+                            });
+                        }
                     }
-                },
-                callback: function (result) {
-                    if (result) {
-                        $.post(url, add_anti_forgery_token(param), function (response) {
-                            if (response) {
-                                tr.remove();
-                            }
-                        });
-                    }
-                }
-            });
-        })
-        .on('click', '#btn_confirmar', function () {
-            var btn = $(this),
+                });
+            })
+            .on('click', '#btn_confirmar', function () {
+                var btn = $(this),
                 url = '@Url.Action("SalvarUsuario", "CadUsuario")',
                 param = {
                     Id: $('#id_cadastro').val(),
